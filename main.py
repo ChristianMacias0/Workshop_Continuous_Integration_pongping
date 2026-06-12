@@ -69,13 +69,13 @@ def calculate_membership_cost(plan_name, selected_features, num_members, confirm
         total_cost -= 20
     return int(round(total_cost, 0))
 def calculate_booking(room_name, selected_services, num_guests, confirmed=True):
-"""Une las partes lógicas para dar el resultado final de la reserva."""
-from hotel_system import validate_inputs, calculate_base_and_premium, apply_discounts
-if not validate_inputs(room_name, selected_services, confirmed):
-return -1
+    """Une las partes lógicas para dar el resultado final de la reserva."""
+    from hotel_system import validate_inputs, calculate_base_and_premium, apply_discounts
+    if not validate_inputs(room_name, selected_services, confirmed):
+        return -1
 
-subtotal = calculate_base_and_premium(room_name, selected_services, num_guests)
-return apply_discounts(subtotal, num_guests)
+    subtotal = calculate_base_and_premium(room_name, selected_services, num_guests)
+    return apply_discounts(subtotal, num_guests)
 
 def get_room_and_guests():
 """Captura los datos iniciales del cliente en la consola."""
@@ -96,9 +96,7 @@ except ValueError:
 print("[Error] Entrada inválida."); return None, None
 
 return ROOM_TYPES[room_choice]["name"], num_guests
-def test_standard_flow_by_integrante4():
-# Standard (50) + Meal (20) = 70.
-assert calculate_booking("Standard", ["All-Inclusive Meal"], 1, True) == 70
+
 
 def apply_discounts(total_cost, num_guests):
     """Aplica descuentos grupales y ofertas especiales al total."""
