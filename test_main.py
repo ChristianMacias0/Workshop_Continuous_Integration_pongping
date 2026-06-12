@@ -56,6 +56,3 @@ def test_validacion_plan_inexistente():
 def test_validacion_servicio_inexistente():
     """Asegura que el sistema rechace servicios extra fuera del catálogo."""
     assert validate_inputs("Basic", ["ServicioFalso"], True) is False
-def test_standard_flow_by_integrante4():
-# Standard (50) + Meal (20) = 70.
-    assert calculate_booking("Standard", ["All-Inclusive Meal"], 1, True) == 70

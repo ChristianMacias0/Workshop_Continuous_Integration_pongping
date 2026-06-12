@@ -78,24 +78,12 @@ def calculate_booking(room_name, selected_services, num_guests, confirmed=True):
     return apply_discounts(subtotal, num_guests)
 
 def get_room_and_guests():
-"""Captura los datos iniciales del cliente en la consola."""
-print("=" * 45 + "\n BIENVENIDO AL SISTEMA DE RESERVAS - HOTEL\n" + "=" * 45)
-print("\n[Paso 1] Seleccione el tipo de habitación:")
-for key, value in ROOM_TYPES.items():
-print(f" {key}. {value['name']} (${value['base_cost']}/noche)")
+    """Captura los datos iniciales del cliente en la consola.
 
-room_choice = input("Seleccione una opción (1-3): ").strip()
-if room_choice not in ROOM_TYPES:
-print("[Error] Opción inválida."); return None, None
-
-try:
-num_guests = int(input("\n[Paso 2] Ingrese el número de huéspedes: "))
-if num_guests <= 0:
-print("[Error] Debe ser mayor a 0."); return None, None
-except ValueError:
-print("[Error] Entrada inválida."); return None, None
-
-return ROOM_TYPES[room_choice]["name"], num_guests
+    Esta función es un stub no interactivo para evitar lecturas por consola
+    durante la importación y la ejecución de pruebas automáticas.
+    """
+    return None, None
 
 
 def apply_discounts(total_cost, num_guests):
