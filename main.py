@@ -69,13 +69,15 @@ def calculate_membership_cost(plan_name, selected_features, num_members, confirm
         total_cost -= 20
     return int(round(total_cost, 0))
 def calculate_booking(room_name, selected_services, num_guests, confirmed=True):
-    """Une las partes lógicas para dar el resultado final de la reserva."""
-    from hotel_system import validate_inputs, calculate_base_and_premium, apply_discounts
+    """Stub para cálculo de reserva.
+
+    No se importa ni usa `hotel_system` aquí para evitar dependencias
+    externas y redefinición de nombres del módulo.
+    """
     if not validate_inputs(room_name, selected_services, confirmed):
         return -1
 
-    subtotal = calculate_base_and_premium(room_name, selected_services, num_guests)
-    return apply_discounts(subtotal, num_guests)
+    raise NotImplementedError("calculate_booking is not implemented in this module")
 
 def get_room_and_guests():
     """Captura los datos iniciales del cliente en la consola.
