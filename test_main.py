@@ -1,11 +1,8 @@
-import pytest
-# Importamos las funciones y los diccionarios de tu archivo original
-from main import calculate_base_and_premium, validate_inputs, ROOM_TYPES, SERVICES
-
+"""Pruebas unitarias para el sistema de reservas."""
+from main import calculate_base_and_premium, validate_inputs
 # === TESTS PARA LA PRIMERA FUNCIÓN ===
-
 def test_habitacion_estandar_sin_servicios():
-    # Standard (50) + No servicios (0) = 50. No premium. 50 * 1 huesped = 50
+    """Prueba que una habitación estándar sin servicios adicionales calcule el costo base."""
     resultado = calculate_base_and_premium("Standard", [], 1)
     assert resultado == 50
 
