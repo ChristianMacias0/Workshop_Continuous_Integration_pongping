@@ -1,7 +1,6 @@
 """Pruebas unitarias para el sistema de membresías del gimnasio."""
 
 # pylint: disable=import-error
-import pytest
 from main import calculate_membership_cost, validate_inputs
 
 def test_plan_basico_sin_extras():
@@ -11,7 +10,7 @@ def test_plan_basico_sin_extras():
 
 def test_recargo_premium_y_oferta_especial():
     """Verifica recargo del 15% por plan premium y el descuento de $20 al superar los $200."""
-    # Premium base: 80. + Personal Training (50) = 130. 
+    # Premium base: 80. + Personal Training (50) = 130.
     # Es Premium -> 130 * 1.15 = 149.5
     # Son 2 miembros -> 149.5 * 2 = 299.
     # Descuento grupal (10%) -> 299 * 0.90 = 269.1
@@ -57,4 +56,3 @@ def test_validacion_plan_inexistente():
 def test_validacion_servicio_inexistente():
     """Asegura que el sistema rechace servicios extra fuera del catálogo."""
     assert validate_inputs("Basic", ["ServicioFalso"], True) is False
-    
