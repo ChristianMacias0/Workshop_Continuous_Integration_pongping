@@ -16,3 +16,31 @@ def calculate_base_and_premium(room_name, selected_services, num_guests):
 
     # Retorna el acumulado multiplicado por el número de huéspedes
     return total_cost * num_guests
+
+# Catálogo de habitaciones y sus costos base (por noche)
+ROOM_TYPES = {
+    "1": {"name": "Standard", "base_cost": 50, "is_premium": False},
+    "2": {"name": "Suite", "base_cost": 100, "is_premium": True},
+    "3": {"name": "Family", "base_cost": 150, "is_premium": False}
+}
+# Servicios adicionales disponibles
+SERVICES = {
+    "1": {"name": "Spa Treatment", "cost": 30},
+    "2": {"name": "All-Inclusive Meal", "cost": 20},
+    "3": {"name": "VIP Lounge Access", "cost": 40}
+}
+
+def validate_inputs(room_name, selected_services, confirmed):
+    """Valida que los datos ingresados existan en el catálogo."""
+    if not confirmed:
+        print("\n[Error] La reserva fue cancelada por el usuario.")
+        return False
+    if room_name not in [room["name"] for room in ROOM_TYPES.values()]:
+        print(f"\n[Error] La habitación '{room_name}' no está disponible.")
+        return False
+    valid_services = [srv["name"] for srv in SERVICES.values()]
+    for service in selected_services:
+        if service not in valid_services:
+            print(f"\n[Error] El servicio '{service}' no está disponible.")
+            return False
+    return True
