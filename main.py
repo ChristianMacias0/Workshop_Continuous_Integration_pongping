@@ -18,19 +18,16 @@ def validate_inputs(plan_name, selected_features, confirmed):
     """Valida que los datos ingresados existan en el catálogo y estén confirmados."""
     if not confirmed:
         print("\n[Error] La membresía fue cancelada por el usuario.")
-        return False
-    
+        return False 
     if plan_name not in PLANS:
         print(f"\n[Error] El plan '{plan_name}' no está disponible.")
-        return False
-        
+        return False     
     for feature in selected_features:
         if feature not in FEATURES:
             print(f"\n[Error] La característica extra '{feature}' no está disponible.")
             return False
             
     return True
-
 def calculate_membership_cost(plan_name, selected_features, num_members, confirmed=True):
     """
     Calcula el costo total de la membresía del gimnasio.
@@ -69,5 +66,4 @@ def calculate_membership_cost(plan_name, selected_features, num_members, confirm
         total_cost -= 50  
     elif total_cost > 200:
         total_cost -= 20  
-
     return int(round(total_cost, 0))
