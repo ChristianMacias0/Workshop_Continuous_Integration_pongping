@@ -104,3 +104,35 @@ def apply_discounts(total_cost, num_guests):
         total_cost -= 20
 
     return int(total_cost)
+
+def get_services_and_confirm(chosen_room, num_guests):
+"""Permite seleccionar múltiples servicios adicionales y confirmar."""
+print("\n[Paso 3] Servicios adicionales disponibles:")
+for key, value in SERVICES.items():
+print(f" {key}. {value['name']} (${value['cost']})")
+print(" 0. Continuar sin agregar más servicios")
+
+selected_services = []
+while True:
+srv_choice = input("Seleccione un servicio (o '0' para continuar): ").strip()
+if srv_choice == "0": break
+if srv_choice in SERVICES:
+name = SERVICES[srv_choice]["name"]
+if name not in selected_services:
+selected_services.append(name)
+print(f" -> '{name}' agregado.")
+else:
+print(" -> Opción inválida.")
+
+print("\n" + "-" * 40 + f"\nRESUMEN: {chosen_room} | Huéspedes: {num_guests}\n" + "-" * 40)
+is_confirmed = input("¿Confirmar reserva? (S/N): ").strip().upper() == "S"
+
+final_cost = calculate_booking(chosen_room, selected_services, num_guests, is_confirmed)
+if final_cost != -1:
+print(f"\n  ¡RESERVA EXITOSA! TOTAL: ${final_cost}\n" + "=" * 45)
+
+if __name__ == "__main__":
+from hotel_system import get_room_and_guests
+room, guests = get_room_and_guests()
+if room and guests:
+get_services_and_confirm(room, guests)
