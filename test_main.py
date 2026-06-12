@@ -1,42 +1,46 @@
-"""Pruebas unitarias para el sistema de reservas."""
+"""Pruebas unitarias para el sistema de reservas del hotel."""
+
+import pytest
 from main import calculate_base_and_premium, validate_inputs
-# === TESTS PARA LA PRIMERA FUNCIÓN ===
+
+
 def test_habitacion_estandar_sin_servicios():
-    """Prueba que una habitación estándar sin servicios adicionales calcule el costo base."""
+    """Valida el costo base de una habitacion estandar sin servicios extra."""
     resultado = calculate_base_and_premium("Standard", [], 1)
     assert resultado == 50
 
+
 def test_habitacion_estandar_con_un_servicio():
-    # Standard (50) + Spa (30) = 80. No premium. 80 * 2 huespedes = 160
+    """Valida el costo de habitacion estandar sumando un servicio basico."""
     resultado = calculate_base_and_premium("Standard", ["Spa Treatment"], 2)
     assert resultado == 160
 
+
 def test_habitacion_suite_aplica_recargo_premium():
-    # Suite es premium de por sí.
-    # Suite (100) + No servicios (0) = 100. 
-    # Con recargo 15% = 115. 115 * 1 huesped = 115
+    """Comprueba que las habitaciones de tipo Suite apliquen el 15% premium."""
     resultado = calculate_base_and_premium("Suite", [], 1)
     assert resultado == 115
 
-def test_servicio_vip_aplica_recargo_premium_a_estandar():
-    # Standard (50) + VIP Lounge (40) = 90.
-    # Tiene servicio VIP, aplica 15% -> 90 * 1.15 = 103.5
-    # 103.5 * 1 huesped = 103.5
-    resultado = calculate_base_and_premium("Standard", ["VIP Lounge Access"], 1)
-    assert resultado == 103.5
 
+def test_servicio_vip_aplica_recargo_premium_a_estandar():
+    """Verifica que el servicio VIP aplique el 15% de recargo a una estandar."""
+    resultado = calculate_base_and_premium("Standard", ["VIP Lounge Access"], 1)
+    assert resultado == pytest.approx(103.5)
 
 
 def test_validacion_correcta():
-    # Datos válidos y confirmados deben retornar True
+    """Confirma que las entradas validas devuelvan un estado verdadero."""
     assert validate_inputs("Standard", ["Spa Treatment"], True) is True
 
+
 def test_validacion_cancelada_por_usuario(capsys):
-    # Si no se confirma, retorna False y avisa en consola
+    """Evalua que una cancelacion explicita retorne falso y muestre alerta."""
     assert validate_inputs("Standard", [], False) is False
     captured = capsys.readouterr()
     assert "[Error]" in captured.out
 
+
 def test_validacion_habitacion_inexistente():
-    # Habitación que no existe en el catálogo debe fallar
+    """Asegura que el sistema rechace habitaciones fuera del catalogo."""
     assert validate_inputs("HabitacionFalsa", [], True) is False
+
