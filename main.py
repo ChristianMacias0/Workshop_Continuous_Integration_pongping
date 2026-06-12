@@ -99,3 +99,20 @@ return ROOM_TYPES[room_choice]["name"], num_guests
 def test_standard_flow_by_integrante4():
 # Standard (50) + Meal (20) = 70.
 assert calculate_booking("Standard", ["All-Inclusive Meal"], 1, True) == 70
+
+def apply_discounts(total_cost, num_guests):
+    """Aplica descuentos grupales y ofertas especiales al total."""
+    # Descuento por grupo (2 o más huéspedes)
+    if num_guests >= 2:
+        print("\n-> ¡Descuento Grupal! Se aplicó un 10% de descuento al total base.")
+        total_cost = total_cost * 0.90
+
+# Descuentos por ofertas especiales fijas
+    if total_cost > 400:
+        print("-> ¡Oferta Especial! Descuento adicional de $50 por superar los $400.")
+        total_cost -= 50
+    elif total_cost > 200:
+        print("-> ¡Oferta Especial! Descuento adicional de $20 por superar los $200.")
+        total_cost -= 20
+
+    return int(total_cost)
