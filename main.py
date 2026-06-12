@@ -96,3 +96,6 @@ except ValueError:
 print("[Error] Entrada inválida."); return None, None
 
 return ROOM_TYPES[room_choice]["name"], num_guests
+def test_standard_flow_by_integrante4():
+# Standard (50) + Meal (20) = 70.
+assert calculate_booking("Standard", ["All-Inclusive Meal"], 1, True) == 70
