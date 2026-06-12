@@ -1,8 +1,8 @@
+"""Módulo para el cálculo de costos y validación de reservas."""
 def calculate_base_and_premium(room_name, selected_services, num_guests):
     """Calcula el costo base de habitación + servicios y añade recargo premium."""
     room_data = next(r for r in ROOM_TYPES.values() if r["name"] == room_name)
     base_cost = room_data["base_cost"]
-    
     # Diego Alfonzo
     services_cost = 0
     for srv_name in selected_services:
