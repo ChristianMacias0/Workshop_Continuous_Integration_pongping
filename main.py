@@ -67,5 +67,4 @@ def calculate_membership_cost(plan_name, selected_features, num_members, confirm
         total_cost -= 50
     elif total_cost > 200:
         total_cost -= 20
-        
     return int(round(total_cost, 0))
