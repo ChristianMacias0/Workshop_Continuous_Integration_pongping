@@ -68,7 +68,7 @@ def calculate_membership_cost(plan_name, selected_features, num_members, confirm
     elif total_cost > 200:
         total_cost -= 20
     return int(round(total_cost, 0))
-def calculate_booking(room_name, selected_services, num_guests, confirmed=True):
+def calculate_booking(room_name, selected_services, _num_guests, confirmed=True):
     """Stub para cálculo de reserva.
 
     No se importa ni usa `hotel_system` aquí para evitar dependencias
