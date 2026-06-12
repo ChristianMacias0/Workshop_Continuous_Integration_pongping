@@ -68,3 +68,20 @@ def calculate_membership_cost(plan_name, selected_features, num_members, confirm
     elif total_cost > 200:
         total_cost -= 20
     return int(round(total_cost, 0))
+
+def apply_discounts(total_cost, num_guests):
+    """Aplica descuentos grupales y ofertas especiales al total."""
+    # Descuento por grupo (2 o más huéspedes)
+    if num_guests >= 2:
+        print("\n-> ¡Descuento Grupal! Se aplicó un 10% de descuento al total base.")
+        total_cost = total_cost * 0.90
+
+# Descuentos por ofertas especiales fijas
+    if total_cost > 400:
+        print("-> ¡Oferta Especial! Descuento adicional de $50 por superar los $400.")
+        total_cost -= 50
+    elif total_cost > 200:
+        print("-> ¡Oferta Especial! Descuento adicional de $20 por superar los $200.")
+        total_cost -= 20
+
+    return int(total_cost)
