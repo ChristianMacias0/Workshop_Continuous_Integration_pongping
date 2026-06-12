@@ -68,3 +68,31 @@ def calculate_membership_cost(plan_name, selected_features, num_members, confirm
     elif total_cost > 200:
         total_cost -= 20
     return int(round(total_cost, 0))
+def calculate_booking(room_name, selected_services, num_guests, confirmed=True):
+"""Une las partes lógicas para dar el resultado final de la reserva."""
+from hotel_system import validate_inputs, calculate_base_and_premium, apply_discounts
+if not validate_inputs(room_name, selected_services, confirmed):
+return -1
+
+subtotal = calculate_base_and_premium(room_name, selected_services, num_guests)
+return apply_discounts(subtotal, num_guests)
+
+def get_room_and_guests():
+"""Captura los datos iniciales del cliente en la consola."""
+print("=" * 45 + "\n BIENVENIDO AL SISTEMA DE RESERVAS - HOTEL\n" + "=" * 45)
+print("\n[Paso 1] Seleccione el tipo de habitación:")
+for key, value in ROOM_TYPES.items():
+print(f" {key}. {value['name']} (${value['base_cost']}/noche)")
+
+room_choice = input("Seleccione una opción (1-3): ").strip()
+if room_choice not in ROOM_TYPES:
+print("[Error] Opción inválida."); return None, None
+
+try:
+num_guests = int(input("\n[Paso 2] Ingrese el número de huéspedes: "))
+if num_guests <= 0:
+print("[Error] Debe ser mayor a 0."); return None, None
+except ValueError:
+print("[Error] Entrada inválida."); return None, None
+
+return ROOM_TYPES[room_choice]["name"], num_guests
